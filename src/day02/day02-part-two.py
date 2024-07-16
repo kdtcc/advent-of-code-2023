@@ -28,24 +28,19 @@ def read_game_data(str):
                     print("COlor unknown", cube_color)
         
 
-    print(game, "has", len(draws), "draws with ", max_red_cubes_drawn, " max red cubes, ", max_green_cubes_drawn, " max green cubes and ", max_blue_cubes_drawn, " max blue cubes.")
+    print(game, "has", len(draws), "draws with at least ", max_red_cubes_drawn, " red cubes, ", max_green_cubes_drawn, " green cubes and ", max_blue_cubes_drawn, " blue cubes.")
     return ({"game_id": game_id, "red": max_red_cubes_drawn, "green": max_green_cubes_drawn, "blue": max_blue_cubes_drawn})
 
 def main():
-    max_red_cubes = 12
-    max_green_cubes = 13
-    max_blue_cubes = 14
-
-    # sum will contain the sum of the possible game ids 
-    sum = 0
+    # sum will contain the sum of the powers of the sets of cubes 
+    power_sum = 0
 
     file = open("./src/day02/input.txt", "r")
     for line in file:
         game_data = read_game_data(line)
-        if game_data["red"] <= max_red_cubes and game_data["green"] <= max_green_cubes and game_data["blue"] <= max_blue_cubes:
-            print("Game with id ", game_data["game_id"], " is possible")
-            sum += game_data["game_id"]
+        power = game_data["red"] * game_data["green"] * game_data["blue"]
+        power_sum += power
 
-    print(sum)
+    print("The sum of the powers of the sets is: ", power_sum)
 
 main()
